@@ -21,7 +21,7 @@ const gitHubReleaseTemplate = createTemplate`https://github.com/${'name'}/${'nam
 //getPartsFromUrl(new URL(url), "v5.0.5")
 const getElectronGetExampleLikePartsFromUrl = (url, version) => ({ 
   mirror: url.pathname.split(`${version}/`)[0], customDir: `${version}/`, customFilename: url.pathname.split(`${version}/`)[1] 
-})(new URL(url))
+})({ url: new URL(url), version })
 
 
 const electronGetTemplate = ({ name, version }) => [ 
