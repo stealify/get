@@ -1,5 +1,15 @@
 # get
 A Component that allows getting files with a predefined schema used to download platform depenedent stuff
+
+### NodeJS Template
+```js
+
+const getNodeJSTemplate = createTemplate`https://nodejs.org/dist/${'version'}/node-${'version'}-${'platform'}-${'arch'}.zip`
+getNodeJSTemplate({ version: "v16.17.0", platform: "win", arch: "x86"}) // https://nodejs.org/dist/v16.17.0/node-v16.17.0-win-x86.zip
+fetch(getNodeJSTemplate({ version: "v16.17.0", platform: "win", arch: "x86"})) // fetchResponse!
+```
+
+
 ```js
 // (createTemplate`${0} ${'foo'}!`)('Hello', {foo: 'World'}); // "Hello World!"
 const createTemplate = (strings, ...keys) => 
