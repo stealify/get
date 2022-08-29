@@ -11,23 +11,17 @@ fetch(getNodeJSTemplate({ version: "v16.17.0", platform: "win", arch: "x86"})) /
 
 
 ```js
-// (createTemplate`${0} ${'foo'}!`)('Hello', {foo: 'World'}); // "Hello World!"
-const createTemplate = (strings, ...keys) => 
-  (...values) => {
-    const dict = (values[values.length - 1] || {});
-    const result = [strings[0]];
-    keys.forEach((key, i) =>
-      result.push(Number.isInteger(key) 
-        ? values[key] : dict[key], strings[i + 1])
-    );
-    return result.join('');
-  };
+import('./get.js').then(({createTemplate})=>{
+  const gitHubReleaseTemplate = createTemplate`https://github.com/${'name'}/${'name'}/releases/download/${'version'}/${'name'}-${'version'}-${'platform'}-${'arch'}.zip`;
+
+  console.log(gitHubReleaseTemplate({ 
+    name: "electron", version: "v5.1.12", platform: process.platform, arch: process.arch 
+  }))
+})
+```
 
 
-const gitHubReleaseTemplate = createTemplate`https://github.com/${'name'}/${'name'}/releases/download/${'version'}/${'name'}-${'version'}-${'platform'}-${'arch'}.zip`;
-
-
-
+```js
 //getPartsFromUrl(new URL(url), "v5.0.5")
 const getElectronGetExampleLikePartsFromUrl = ((url, version) => ({ 
   mirror: url.pathname.split(`${version}/`)[0], customDir: `${version}/`, customFilename: url.pathname.split(`${version}/`)[1] 
@@ -46,9 +40,7 @@ const electronGetTemplate = ({ name, version }) => [
   createTemplate`${'mirror'}/${'customDir'}/${'customFileName'}`)(electronGetLikeObject)
 )[0];
 
-console.log(gitHubReleaseTemplate({ 
-  name: "electron", version: "v5.1.12", platform: process.platform, arch: process.arch 
-}))
+
 // same 
 electronGetTemplate("electron", "v4.0.4")
 
