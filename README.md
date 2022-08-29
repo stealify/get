@@ -1,5 +1,6 @@
 # get
 A Component that allows getting files with a predefined schema used to download platform depenedent stuff
+```js
 // (createTemplate`${0} ${'foo'}!`)('Hello', {foo: 'World'}); // "Hello World!"
 const createTemplate = (strings, ...keys) => 
   (...values) => {
@@ -50,3 +51,4 @@ electronGetTemplate("electron", "v4.0.4")
 //                                                       customDir
 // ```
 
+```
